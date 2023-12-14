@@ -33,7 +33,7 @@ module.exports = {
   ],
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.js', '.jsx', '.json', '.scss', '.less'],
     alias: {
       '@api': path.resolve(`${__dirname}/src/api`),
       '@components': path.resolve(`${__dirname}/src/components`),
@@ -53,6 +53,26 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                strictMath: true
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,

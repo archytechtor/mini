@@ -1,5 +1,7 @@
 import message from './message';
+import Button from './button';
 
 export {
-  message
+  message,
+  Button
 };

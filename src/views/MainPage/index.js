@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {magic} from '@utils';
+import {FloatButton} from 'antd';
 
 const MainPage = ({logOut}) => (
   <div>
     {'MainPage'}
-
-    <button
-      type={'button'}
+    <FloatButton
+      description={'X'}
+      shape={'square'}
+      type={'primary'}
+      style={{right: 24}}
       onClick={logOut}
-    >
-      {'Выйти'}
-    </button>
+    />
   </div>
 );
 

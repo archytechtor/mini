@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink, Navigate} from 'react-router-dom';
 import {magic, ROUTES} from '@utils';
+import {Button} from '@ui';
+import {Input, Flex} from 'antd';
 import s from './style.scss';
 
 const AuthPage = (props) => {
@@ -10,7 +12,6 @@ const AuthPage = (props) => {
     setEmail,
     password,
     setPassword,
-    showPassword,
     isLogin,
     user,
     setIsLogin,
@@ -23,46 +24,57 @@ const AuthPage = (props) => {
   }
 
   return (
-    <div className={s.page}>
-      <input
-        value={email}
-        onChange={setEmail}
-        type={'email'}
-        placeholder={'Email'}
-      />
-      <input
-        value={password}
-        onChange={setPassword}
-        type={showPassword ? 'text' : 'password'}
-        placeholder={'Пароль'}
-      />
-      <button
-        type={'button'}
-        onClick={submit}
-        disabled={loading}
+    <Flex
+      justify={'center'}
+      align={'center'}
+      className={s.container}
+    >
+      <Flex
+        gap={16}
+        justify={'center'}
+        align={'center'}
+        vertical={true}
+        className={s.form}
       >
-        {isLogin ? 'Войти' : 'Создать'}
-      </button>
-      {
-        isLogin ? (
-          <RouterLink
-            to={ROUTES.SIGN_UP}
-            onClick={() => setIsLogin(false)}
-          >
-            {'Нет аккаунта? '}
-            {'Регистрация'}
-          </RouterLink>
-        ) : (
-          <RouterLink
-            to={ROUTES.SIGN_IN}
-            onClick={() => setIsLogin(true)}
-          >
-            {'Есть аккаунт? '}
-            {'Авторизация'}
-          </RouterLink>
-        )
-      }
-    </div>
+        <Input
+          value={email}
+          onChange={setEmail}
+          type={'email'}
+          placeholder={'Email'}
+        />
+        <Input.Password
+          value={password}
+          onChange={setPassword}
+          placeholder={'Пароль'}
+        />
+        <Button
+          onClick={submit}
+          loading={loading}
+          block={true}
+        >
+          {isLogin ? 'Войти' : 'Создать'}
+        </Button>
+        {
+          isLogin ? (
+            <RouterLink
+              to={ROUTES.SIGN_UP}
+              onClick={() => setIsLogin(false)}
+            >
+              {'Нет аккаунта? '}
+              {'Регистрация'}
+            </RouterLink>
+          ) : (
+            <RouterLink
+              to={ROUTES.SIGN_IN}
+              onClick={() => setIsLogin(true)}
+            >
+              {'Есть аккаунт? '}
+              {'Авторизация'}
+            </RouterLink>
+          )
+        }
+      </Flex>
+    </Flex>
   );
 };
 
@@ -72,7 +84,6 @@ const mapStore = ({UserStore}) => {
     setEmail: UserStore.setEmail,
     password: UserStore.password,
     setPassword: UserStore.setPassword,
-    showPassword: UserStore.showPassword,
     isLogin: UserStore.isLogin,
     user: UserStore.user,
     setIsLogin: UserStore.setIsLogin,
@@ -86,7 +97,6 @@ AuthPage.propTypes = {
   setEmail: PropTypes.func,
   password: PropTypes.string,
   setPassword: PropTypes.func,
-  showPassword: PropTypes.bool,
   isLogin: PropTypes.bool,
   user: PropTypes.object,
   setIsLogin: PropTypes.func,

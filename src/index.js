@@ -4,6 +4,8 @@ import StyleContext from 'isomorphic-style-loader-react18/StyleContext';
 import {Provider} from 'mobx-react';
 import {UiStore, UserStore} from '@stores';
 import App from './App';
+import {ConfigProvider} from 'antd';
+import {THEME} from '@utils';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -21,11 +23,13 @@ const AppContext = {
 
 root.render(
   <StyleContext.Provider value={AppContext}>
-    <Provider
-      UiStore={newUiStore}
-      UserStore={newUserStore}
-    >
-      <App />
-    </Provider>
+    <ConfigProvider theme={THEME}>
+      <Provider
+        UiStore={newUiStore}
+        UserStore={newUserStore}
+      >
+        <App />
+      </Provider>
+    </ConfigProvider>
   </StyleContext.Provider>
 );
