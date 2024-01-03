@@ -13,6 +13,10 @@
   "author": "archytechtor",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "11.11.1",
+    "@emotion/styled": "11.11.0",
+    "@mui/icons-material": "5.15.0",
+    "@mui/material": "5.15.0",
     "firebase": "9.14.0",
     "mobx": "6.7.0",
     "mobx-react": "7.6.0",
