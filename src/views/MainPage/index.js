@@ -1,28 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {magic} from '@utils';
+import Game from './game';
+import s from './style.scss';
 
-const MainPage = ({logOut}) => (
-  <div>
-    {'MainPage'}
+const MainPage = () => {
+  const ref = React.useRef();
 
-    <button
-      type={'button'}
-      onClick={logOut}
-    >
-      {'Выйти'}
-    </button>
-  </div>
-);
+  React.useEffect(() => {
+    const game = new Game(ref.current);
 
-const mapStore = ({UserStore}) => {
-  return {
-    logOut: UserStore.logOut
-  };
+    game.animate(0);
+  }, []);
+
+  return (
+    <canvas ref={ref} />
+  );
 };
 
-MainPage.propTypes = {
-  logOut: PropTypes.func
-};
-
-export default magic(MainPage, {store: mapStore});
+export default magic(MainPage, {styles: s});
